@@ -240,11 +240,12 @@ $(document).ready(function() {
         render();
     });
 
-    // TODO 6
-    // Add another event handler with a callback function.
     // When the textbox content changes,
     // update the .currentAttempt property of the model and re-render
-
+    $("#textbox").on("input", function(){
+        model.currentAttempt = $("#textbox").val();
+        render();
+    });
 
     // when the form is submitted
     $("#word-attempt-form").submit(function(evt) {
