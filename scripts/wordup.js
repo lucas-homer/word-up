@@ -169,6 +169,9 @@ function render() {
     if (gameOver) {
         // TODO 9
         // disable the text box and clear its contents
+        $("#textbox").val("");
+        $("#textbox").prop("disabled", true);
+        
 
     }
 }
