@@ -160,9 +160,8 @@ function render() {
         // show the disallowed letters underneath
         var redLetterChips = disallowedLetters.map(disallowedLetterChip);
 
-        // TODO 8
         // append the red letter chips to the form
-
+        $("#word-attempt-form").append(redLetterChips);
     }
 
     // if the game is over
@@ -280,7 +279,6 @@ var scrabblePointsForEachLetter = {
  * meaning it is not a member of the .allowedLetters list from the current model
  */
 function isDisallowedLetter(letter) {
-    // TODO 7
     // This should return true if the letter is not an element of
     // the .allowedLetters list in the model
     if((model.allowedLetters).indexOf(letter) === -1){
@@ -288,7 +286,6 @@ function isDisallowedLetter(letter) {
     } else {
         return false;
     };
-    
 }
 
 /**
