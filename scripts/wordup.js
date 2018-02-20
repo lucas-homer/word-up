@@ -128,10 +128,11 @@ function render() {
     // GAME -------------------------------------
 
     // clear stuff
+    $("#textbox").prop("disabled", false);
+    $("#textbox").removeClass("bad-attempt");
+    $("#word-attempt-form .tag-danger").remove();
     $("#allowed-letters").empty();
     $("#word-submissions").empty();
-    // TODO 10
-    // Add a few things to the above code block (underneath "// clear stuff").
 
 
     // reveal the #game container
@@ -167,12 +168,9 @@ function render() {
     // if the game is over
     var gameOver = model.secondsRemaining <= 0
     if (gameOver) {
-        // TODO 9
         // disable the text box and clear its contents
         $("#textbox").val("");
         $("#textbox").prop("disabled", true);
-        
-
     }
 }
 
