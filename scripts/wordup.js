@@ -303,9 +303,9 @@ function disallowedLettersInWord(word) {
  * i.e. the word does not contain any disallowed letters
  */
 function containsOnlyAllowedLetters(word) {
-    // TODO 12
-    // Return the actual answer.
-    return true;
+    if (disallowedLettersInWord(word).length === 0) {
+        return true;
+    }; 
 }
 
 /**
