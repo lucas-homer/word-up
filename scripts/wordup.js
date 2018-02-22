@@ -58,8 +58,12 @@ function addNewWordSubmission(word) {
     // if the word is valid and hasn't already been used, add it
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
         model.wordSubmissions.push({ word: word });
+        
         // and now we must also determine whether this is actually a real word
+
         checkIfWordIsReal(word);
+
+        
     }
 }
 
@@ -77,20 +81,18 @@ function checkIfWordIsReal(word) {
         success: function(response) {
             console.log("We received a response from Pearson!");
 
-            // let's print the response to the console so we can take a looksie
-            console.log(response);
-
-            // TODO 14
-            // Replace the 'true' below.
-            // If the response contains any results, then the word is legitimate.
-            // Otherwise, it is not.
-            var theAnswer = true;
-
-            // TODO 15
             // Update the corresponding wordSubmission in the model
-
-
-            // re-render
+            var theAnswer = response.results;
+            var isRealWord = "isRealWord";
+            
+            if(theAnswer.length > 0) {
+                model.wordSubmissions[(model.wordSubmissions.length)-1][isRealWord] = true;
+                console.log(true);
+            } else {
+                model.wordSubmissions[(model.wordSubmissions.length)-1][isRealWord] = false;
+                console.log(false);
+            };
+            
             render();
         },
         error: function(err) {
@@ -212,7 +214,7 @@ function wordSubmissionChip(wordSubmission) {
 
         // TODO 16
         // append scoreChip into wordChip
-
+        wordChip.append(scoreChip);
     }
 
     return wordChip;
