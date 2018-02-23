@@ -62,7 +62,7 @@ function addNewWordSubmission(word) {
         // and now we must also determine whether this is actually a real word
 
         checkIfWordIsReal(word);
-
+        console.log(checkIfWordIsReal(word));
         
     }
 }
@@ -87,10 +87,10 @@ function checkIfWordIsReal(word) {
             
             if(theAnswer.length > 0) {
                 model.wordSubmissions[(model.wordSubmissions.length)-1][isRealWord] = true;
-                console.log(true);
+                return true;
             } else {
                 model.wordSubmissions[(model.wordSubmissions.length)-1][isRealWord] = false;
-                console.log(false);
+                return false;
             };
             
             render();
@@ -205,14 +205,26 @@ function wordSubmissionChip(wordSubmission) {
 
     // if we know the status of this word (real word or not), then add a green score or red X
     if (wordSubmission.hasOwnProperty("isRealWord")) {
-        var scoreChip = $("<span></span>").text("⟐");
+        var scoreChip = $("<span></span>");
+        //scoreChip.text(wordSubmission.isRealWord ? wordScore(wordSubmission.word) : "X");
+        if (wordSubmission.isRealWord) {
+            scoreChip.text(wordScore(wordSubmission.word));
+            scoreChip.attr("class", "tag tag-sm tag-primary");
+        } else {
+            scoreChip.text("X");
+            scoreChip.attr("class", "tag tag-sm tag-danger");
+        };
+    
+        
+        
+
         // TODO 17
         // give the scoreChip appropriate text content
-
+        //scoreChip.text(wordScore(wordSubmission.word));
+        
         // TODO 18
         // give the scoreChip appropriate css classes
 
-        // TODO 16
         // append scoreChip into wordChip
         wordChip.append(scoreChip);
     }
