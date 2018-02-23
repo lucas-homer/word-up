@@ -51,9 +51,14 @@ function endGame() {
  */
 function addNewWordSubmission(word) {
     // Do we already have a wordSubmission with this word?
-    // TODO 21
-    // replace the hardcoded 'false' with the real answer
+    
     var alreadyUsed = false;
+
+    model.wordSubmissions.forEach(function(element) {
+      if (element.word == word) {
+        alreadyUsed = true;
+      }
+    });
 
     // if the word is valid and hasn't already been used, add it
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
@@ -61,6 +66,7 @@ function addNewWordSubmission(word) {
         
         // determine whether this is actually a real word
         checkIfWordIsReal(word); 
+        
     }
 }
 
@@ -77,7 +83,7 @@ function checkIfWordIsReal(word) {
         url: "http://api.pearson.com/v2/dictionaries/lasde/entries?headword=" + word,
         success: function(response) {
             console.log("We received a response from Pearson!");
-
+            console.log(response);
             // Update the corresponding wordSubmission in the model
             var theAnswer = response.results;
             var isRealWord = "isRealWord";
@@ -358,7 +364,6 @@ function currentScore() {
         }
     });
 
-    // TODO 20
     // return the total sum of the word scores
     return wordScores.reduce(add, 0);
 }
