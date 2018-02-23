@@ -59,11 +59,8 @@ function addNewWordSubmission(word) {
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
         model.wordSubmissions.push({ word: word });
         
-        // and now we must also determine whether this is actually a real word
-
-        checkIfWordIsReal(word);
-        console.log(checkIfWordIsReal(word));
-        
+        // determine whether this is actually a real word
+        checkIfWordIsReal(word); 
     }
 }
 
@@ -206,7 +203,9 @@ function wordSubmissionChip(wordSubmission) {
     // if we know the status of this word (real word or not), then add a green score or red X
     if (wordSubmission.hasOwnProperty("isRealWord")) {
         var scoreChip = $("<span></span>");
-        //scoreChip.text(wordSubmission.isRealWord ? wordScore(wordSubmission.word) : "X");
+        
+        // give the scoreChip appropriate text content
+        // give the scoreChip appropriate css classes
         if (wordSubmission.isRealWord) {
             scoreChip.text(wordScore(wordSubmission.word));
             scoreChip.attr("class", "tag tag-sm tag-primary");
@@ -215,16 +214,6 @@ function wordSubmissionChip(wordSubmission) {
             scoreChip.attr("class", "tag tag-sm tag-danger");
         };
     
-        
-        
-
-        // TODO 17
-        // give the scoreChip appropriate text content
-        //scoreChip.text(wordScore(wordSubmission.word));
-        
-        // TODO 18
-        // give the scoreChip appropriate css classes
-
         // append scoreChip into wordChip
         wordChip.append(scoreChip);
     }
@@ -346,11 +335,9 @@ function wordScore(word) {
     // split the word into a list of letters
     var letters = word.split("");
 
-    // TODO 19
-    // Replace the empty list below.
     // Map the list of letters into a list of scores, one for each letter.
-    var letterScores = [];
-
+    var letterScores = letters.map(letterScore);
+    
     // return the total sum of the letter scores
     return letterScores.reduce(add, 0);
 }
