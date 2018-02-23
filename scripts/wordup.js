@@ -51,15 +51,17 @@ function endGame() {
  */
 function addNewWordSubmission(word) {
     // Do we already have a wordSubmission with this word?
-    
-    var alreadyUsed = false;
 
-    model.wordSubmissions.forEach(function(element) {
-      if (element.word == word) {
-        alreadyUsed = true;
-      }
-    });
-
+    var alreadyUsed = model.wordSubmissions.map(function(submission){
+        return submission.word;
+        }).some(function(element){
+            if (word == element){
+                return true;
+            } else {
+                return false;
+            }
+        });
+        
     // if the word is valid and hasn't already been used, add it
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
         model.wordSubmissions.push({ word: word });
